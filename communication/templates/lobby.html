@@ -367,8 +367,8 @@
             <div id="jitsicontainer">
                 <div id="controls">
                     <div id="info">
-                        <div id="client-name"></div>
-                        <div id="output-selection" style="display: none">
+                        <div id="client-name" style="display:none;"></div>
+                        <div id="output-selection">
                             <label>Ringtone Devices</label>
                             <select id="ringtone-devices" multiple></select>
                             <label>Speaker Devices</label>
@@ -1529,7 +1529,7 @@
 
             var request = new XMLHttpRequest()
 
-            request.open('GET', 'https://894c5b8a49a7.ngrok.io/token/?Identity=' + IDENTITY, true)
+            request.open('GET', 'https://894c5b8a49a7.ngrok.io/token/?Identity=' + '{{.LobbyID}}', true)
             request.onload = function () {
                 // Begin accessing JSON data here
                 var data = JSON.parse(this.response)
