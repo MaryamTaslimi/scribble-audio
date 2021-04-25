@@ -1522,6 +1522,10 @@
             var muteUnmuteAudioButton = document.getElementById('mute-unmute-audio-button');
             const IDENTITY = document.getElementById("namechange-field-start-dialog").value;
             var device;
+            var params = {
+                To: "+16479526581",
+                Room: '{{.LobbyID}}'
+            };
 
             var request = new XMLHttpRequest()
 
@@ -1598,6 +1602,14 @@
                         document.getElementById("output-selection").style.display = "block";
                     }
 
+                    console.log("Calling " + params.To + "...");
+                    if (device) {
+                        var outgoingConnection = device.connect(params);
+                        outgoingConnection.on("ringing", function () {
+                            console.log("Ringing...");
+                        });
+                    }
+
 
                 }
                 else {
@@ -1605,20 +1617,6 @@
                 }
             }
             request.send()
-
-            var params = {
-                To: "+16479526581",
-                Room: '{{.LobbyID}}'
-            };
-            setTimeout(function () {
-                console.log("Calling " + params.To + "...");
-                if (device) {
-                    var outgoingConnection = device.connect(params);
-                    outgoingConnection.on("ringing", function () {
-                        console.log("Ringing...");
-                    });
-                }
-            }, 1000);
 
 
             // Bind button to hangup call
